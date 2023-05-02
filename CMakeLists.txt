@@ -20,12 +20,14 @@ include_directories(include)
 set(INCLUDES include/Button.h
              include/CallButton.h
              include/FloorButton.h
+             include/LocalController.h
              include/ClientComModule.h
              include/Elevator.h)
 
 set(SOURCES src/Button.cpp
             src/CallButton.cpp
             src/FloorButton.cpp
+            src/LocalController.cpp
             src/ClientComModule.cpp
             src/Elevator.cpp)
 

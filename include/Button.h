@@ -12,4 +12,5 @@ public:
 signals:
     void turnOnBacklight();
     void turnOffBacklight();
+    void notifyController(int floorNumber);
 };
