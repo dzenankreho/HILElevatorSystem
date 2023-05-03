@@ -13,6 +13,7 @@ void FloorButton::buttonPressed() {
 //    std::cout << "Elevator going to floor " << number << std::endl;
 
     emit turnOnBacklight();
+    emit notifyController(getFloorNumber());
 //    QTimer::singleShot(2000, [this]() {
 //        ClientComModule::getAccess().goToFloor(number);
 //        emit toggleBacklight();

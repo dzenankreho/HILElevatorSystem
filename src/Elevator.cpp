@@ -25,3 +25,12 @@ int Elevator::getElevatorNumber() const {
 bool operator<(std::reference_wrapper<Elevator> m1, std::reference_wrapper<Elevator> m2) {
     return m1.get().getElevatorNumber() < m2.get().getElevatorNumber();
 }
+
+
+void Elevator::setCurrentFloor(int floorNumber) {
+    if (floorNumber < 0) {
+        throw std::invalid_argument("Floor number must be >= 0");
+    }
+
+    currentFloor = floorNumber;
+}

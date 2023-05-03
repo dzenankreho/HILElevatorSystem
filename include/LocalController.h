@@ -24,4 +24,5 @@ public:
 
 public slots:
     void callButtonClicked(int floorNumber);
+    void floorButtonClicked(int floorNumber);
 };

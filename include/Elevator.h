@@ -12,6 +12,7 @@ public:
     int getCurrentFloor() const;
     int getElevatorNumber() const;
     friend bool operator<(std::reference_wrapper<Elevator> m1, std::reference_wrapper<Elevator> m2);
+    void setCurrentFloor(int floorNumber);
 
 signals:
     void openDoor(int floor);

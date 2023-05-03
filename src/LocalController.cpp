@@ -1,5 +1,8 @@
 #include "LocalController.h"
 #include "ClientComModule.h"
+#include <QTimer>
+#include <utility>
+#include <iostream>
 
 
 LocalController::LocalController() {
@@ -30,6 +33,8 @@ void LocalController::registerFloorButton(ElevatorRef elevator, FloorButtonRef f
     } catch(std::out_of_range) {
         floorButtons[elevator].push_back(floorButton);
     }
+
+     QObject::connect(&floorButton.get(), &FloorButton::notifyController, this, &LocalController::floorButtonClicked);
 }
 
 
@@ -45,5 +50,47 @@ void LocalController::registerCallButton(CallButtonRef callButton) {
 
 
 void LocalController::callButtonClicked(int floorNumber) {
-    emit elevators.at(0).get().openDoor(floorNumber);
+    Elevator& elevator{ elevators.at(ClientComModule::getAccess().elevatorCalled(floorNumber)).get() };
+
+
+    QTimer::singleShot(std::abs(elevator.getCurrentFloor() - floorNumber) * 1000,
+        [&elevator, floorNumber, this]() {
+        elevator.setCurrentFloor(floorNumber);
+
+        emit std::find_if(callButtons.begin(), callButtons.end(), [floorNumber](const auto& clb) {
+            return clb.get().getFloorNumber() == floorNumber; })->get().turnOffBacklight();
+
+        emit elevator.openDoor(floorNumber);
+
+        emit elevator.enableElevatorButtons();
+    });
+}
+
+
+void LocalController::floorButtonClicked(int floorNumber) {
+    std::pair<int, int> elevatorAndFloor{ ClientComModule::getAccess().goToFloor(floorNumber) };
+    Elevator& elevator{ elevators.at(elevatorAndFloor.first).get() };
+
+    std::cout << "Ovdje " << elevatorAndFloor.first << " " << elevatorAndFloor.second << std::endl;
+
+    QTimer::singleShot(1000, [&elevator, floorNumber, this]() {
+        emit std::find_if(floorButtons.at(elevator).begin(), floorButtons.at(elevator).end(),[floorNumber](const auto& flb) {
+            return flb.get().getFloorNumber() == floorNumber; })->get().turnOffBacklight();
+
+        emit elevator.closeDoor(elevator.getCurrentFloor());
+
+        emit elevator.disableElevatorButtons();
+
+        QTimer::singleShot(std::abs(elevator.getCurrentFloor() - floorNumber) * 1000,
+            [&elevator, floorNumber]() {
+
+            elevator.setCurrentFloor(floorNumber);
+
+            emit elevator.openDoor(floorNumber);
+
+            QTimer::singleShot(1000, [&elevator, floorNumber]() {
+                emit elevator.closeDoor(floorNumber);
+            });
+        });
+    });
 }

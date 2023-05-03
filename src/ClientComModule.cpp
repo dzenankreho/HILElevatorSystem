@@ -23,3 +23,13 @@ void ClientComModule::initializeComModule() {
         throw std::logic_error("Communication module already initialized!");
     }
 }
+
+
+int ClientComModule::elevatorCalled(int floorNumber) {
+    return client.call("elevatorCalled", floorNumber).as<int>();
+}
+
+
+std::pair<int, int> ClientComModule::goToFloor(int floorNumber) {
+    return client.call("goToFloor", floorNumber).as<std::pair<int, int>>();
+}
