@@ -16,8 +16,8 @@ int Elevator::getElevatorNumber() const {
 }
 
 
-bool operator<(std::reference_wrapper<Elevator> m1, std::reference_wrapper<Elevator> m2) {
-    return m1.get().getElevatorNumber() < m2.get().getElevatorNumber();
+bool operator<(std::reference_wrapper<Elevator> el1, std::reference_wrapper<Elevator> el2) {
+    return el1.get().getElevatorNumber() < el2.get().getElevatorNumber();
 }
 
 

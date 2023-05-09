@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
     QQmlApplicationEngine engine;
 
     LocalController localController;
-    Elevator elevator1, elevator2;
+    GuiElevator elevator1, elevator2;
     localController.registerElevator(elevator1);
     localController.registerElevator(elevator2);
 

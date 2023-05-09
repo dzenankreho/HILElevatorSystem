@@ -1,5 +1,5 @@
 #pragma once
-#include "Elevator.h"
+#include "GuiElevator.h"
 #include "FloorButton.h"
 #include "CallButton.h"
 #include <vector>
@@ -8,18 +8,18 @@
 #include <QObject>
 
 class LocalController : public QObject {
-    using ElevatorRef = std::reference_wrapper<Elevator>;
+    using GuiElevatorRef = std::reference_wrapper<GuiElevator>;
     using FloorButtonRef = std::reference_wrapper<FloorButton>;
     using CallButtonRef = std::reference_wrapper<CallButton>;
 
-    std::vector<ElevatorRef> elevators;
-    std::map<ElevatorRef, std::vector<FloorButtonRef>> floorButtons;
+    std::vector<GuiElevatorRef> elevators;
+    std::map<GuiElevatorRef, std::vector<FloorButtonRef>> floorButtons;
     std::vector<CallButtonRef> callButtons;
 
 public:
     LocalController();
-    void registerElevator(ElevatorRef elevator);
-    void registerFloorButton(ElevatorRef elevator, FloorButtonRef floorButton);
+    void registerElevator(GuiElevatorRef elevator);
+    void registerFloorButton(GuiElevatorRef elevator, FloorButtonRef floorButton);
     void registerCallButton(CallButtonRef callButton);
 
 public slots:

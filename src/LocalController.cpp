@@ -12,7 +12,7 @@ LocalController::LocalController() {
 }
 
 
-void LocalController::registerElevator(ElevatorRef elevator) {
+void LocalController::registerElevator(GuiElevatorRef elevator) {
     if (elevator.get().getElevatorNumber() != -1) {
         throw std::logic_error("Elevator already has an elevator number!");
     }
@@ -22,7 +22,7 @@ void LocalController::registerElevator(ElevatorRef elevator) {
 }
 
 
-void LocalController::registerFloorButton(ElevatorRef elevator, FloorButtonRef floorButton) {
+void LocalController::registerFloorButton(GuiElevatorRef elevator, FloorButtonRef floorButton) {
     try {
         auto& elevatorFloorButtons{ floorButtons.at(elevator) };
 
@@ -54,7 +54,7 @@ void LocalController::registerCallButton(CallButtonRef callButton) {
 
 
 void LocalController::callButtonClicked(int floorNumber) {
-    Elevator& elevator{ elevators.at(ClientComModule::getAccess().elevatorCalled(floorNumber)).get() };
+    GuiElevator& elevator{ elevators.at(ClientComModule::getAccess().elevatorCalled(floorNumber)).get() };
     elevator.setBusy(true);
 
     QTimer::singleShot(std::abs(elevator.getCurrentFloor() - floorNumber) * 1000,
@@ -84,7 +84,7 @@ void LocalController::floorButtonClicked(int floorNumber) {
     }
 
     ClientComModule::getAccess().goToFloor(elevatorNumber, floorNumber);
-    Elevator& elevator{ elevators.at(elevatorNumber).get() };
+    GuiElevator& elevator{ elevators.at(elevatorNumber).get() };
 
     QTimer::singleShot(1000, [&elevator, floorNumber, this]() {
         emit std::find_if(floorButtons.at(elevator).begin(), floorButtons.at(elevator).end(),[floorNumber](const auto& flb) {

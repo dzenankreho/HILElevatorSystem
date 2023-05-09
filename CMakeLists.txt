@@ -23,6 +23,7 @@ set(INCLUDES include/Button.h
              include/LocalController.h
              include/ClientComModule.h
              include/Elevator.h
+             include/GuiElevator.h
              include/ServerController.h
              include/ServerComModule.h)
 
@@ -32,6 +33,7 @@ set(SOURCES src/Button.cpp
             src/LocalController.cpp
             src/ClientComModule.cpp
             src/Elevator.cpp
+            src/GuiElevator.cpp
             src/ServerController.cpp
             src/ServerComModule.cpp)
 
