@@ -3,6 +3,9 @@
 #include <algorithm>
 #include <cmath>
 #include <functional>
+#ifndef NDEBUG
+#include <iostream>
+#endif
 
 
 ServerController::ServerController() {
@@ -24,17 +27,29 @@ int ServerController::elevatorCalled(int floorNumber) {
         }
     }
 
+#ifndef NDEBUG
+    std::cout << "Server selected elevator with elevator number: " << elevator << std::endl;
+#endif
+
     elevators.at(elevator).get().setBusy(true);
     return elevator;
 }
 
 
 void ServerController::goToFloor(int elevatorNumber, int floorNumber) {
+#ifndef NDEBUG
+    std::cout << "Elevator with elevator number: " << elevatorNumber
+              << " is going to floor: " << floorNumber << std::endl;
+#endif
     elevators.at(elevatorNumber).get().setCurrentFloor(floorNumber);
 }
 
 
 void ServerController::freeBusyElevator(int elevatorNumber) {
+#ifndef NDEBUG
+    std::cout << "Elevator with elevator number: " << elevatorNumber
+              << " is freed" << std::endl;
+#endif
     elevators.at(elevatorNumber).get().setBusy(false);
 }
 

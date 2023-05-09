@@ -1,6 +1,9 @@
 #include "ServerComModule.h"
 #include <algorithm>
 #include <stdexcept>
+#ifndef NDEBUG
+#include <iostream>
+#endif
 
 
 ServerComModule* ServerComModule::serverComModule{};

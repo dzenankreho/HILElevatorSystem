@@ -1,6 +1,9 @@
 #include "ClientComModule.h"
 #include <algorithm>
 #include <stdexcept>
+#ifndef NDEBUG
+#include <iostream>
+#endif
 
 
 ClientComModule* ClientComModule::clientComModule{};
@@ -26,12 +29,20 @@ void ClientComModule::initializeComModule() {
 
 
 int ClientComModule::elevatorCalled(int floorNumber) {
+#ifndef NDEBUG
+    std::cout << "elevatorCalled called from client com. module with floor number: "
+              << floorNumber << std::endl;
+#endif
     return client.call("elevatorCalled", floorNumber).as<int>();
 }
 
 
 void ClientComModule::goToFloor(int elevatorNumber, int floorNumber) {
-    client.call("goToFloor", elevatorNumber, floorNumber);
+#ifndef NDEBUG
+    std::cout << "goToFloor called from client com. module with elevator number: "
+              << elevatorNumber << " and floor number: " << floorNumber << std::endl;
+#endif
+    client.call("goToFloor", floorNumber, elevatorNumber);
 }
 
 
@@ -54,5 +65,9 @@ bool ClientComModule::testConnection() {
 
 
 void ClientComModule::freeBusyElevator(int elevatorNumber) {
+#ifndef NDEBUG
+    std::cout << "freeBusyElevator called from client com. module with elevator number: "
+              << elevatorNumber << std::endl;
+#endif
      client.call("freeBusyElevator", elevatorNumber);
 }

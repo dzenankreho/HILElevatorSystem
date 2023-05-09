@@ -4,6 +4,9 @@
 #include <utility>
 #include <iostream>
 #include <memory>
+#ifndef NDEBUG
+#include <iostream>
+#endif
 
 
 LocalController::LocalController() {
@@ -55,6 +58,12 @@ void LocalController::registerCallButton(CallButtonRef callButton) {
 
 void LocalController::callButtonClicked(int floorNumber) {
     GuiElevator& elevator{ elevators.at(ClientComModule::getAccess().elevatorCalled(floorNumber)).get() };
+
+#ifndef NDEBUG
+    std::cout << "Server returned elevator number: "
+              << elevator.getElevatorNumber() << std::endl;
+#endif
+
     elevator.setBusy(true);
 
     QTimer::singleShot(std::abs(elevator.getCurrentFloor() - floorNumber) * 1000,
@@ -82,6 +91,11 @@ void LocalController::floorButtonClicked(int floorNumber) {
             break;
         }
     }
+
+#ifndef NDEBUG
+    std::cout << "Floor button with floor number: " << floorButton.get().getFloorNumber()
+              << " that belongs to elevator with elevator number: " << elevatorNumber << std::endl;
+#endif
 
     ClientComModule::getAccess().goToFloor(elevatorNumber, floorNumber);
     GuiElevator& elevator{ elevators.at(elevatorNumber).get() };
