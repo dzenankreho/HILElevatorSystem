@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
     QQmlApplicationEngine engine;
 
     LocalController localController;
-    Elevator elevator1(1), elevator2(2);
+    Elevator elevator1, elevator2;
     localController.registerElevator(elevator1);
     localController.registerElevator(elevator2);
 
@@ -26,9 +26,9 @@ int main(int argc, char *argv[]) {
     localController.registerFloorButton(elevator1, elevator1FloorButton0);
     localController.registerFloorButton(elevator1, elevator1FloorButton1);
     localController.registerFloorButton(elevator1, elevator1FloorButton2);
-    localController.registerFloorButton(elevator2, elevator1FloorButton0);
-    localController.registerFloorButton(elevator2, elevator1FloorButton1);
-    localController.registerFloorButton(elevator2, elevator1FloorButton2);
+    localController.registerFloorButton(elevator2, elevator2FloorButton0);
+    localController.registerFloorButton(elevator2, elevator2FloorButton1);
+    localController.registerFloorButton(elevator2, elevator2FloorButton2);
 
 
     engine.rootContext()->setContextProperty("elevator1", &elevator1);

@@ -1,14 +1,8 @@
 #include "Elevator.h"
 #include <stdexcept>
+#include <iostream>
 
-
-Elevator::Elevator(int elevatorNumber) {
-    if (elevatorNumber < 1) {
-        throw std::invalid_argument("Elevator number must be > 1!");
-    }
-
-    this->elevatorNumber = elevatorNumber;
-    currentFloor = 0;
+Elevator::Elevator() : currentFloor{ 0 }, busy{ false }, elevatorNumber{ -1 } {
 }
 
 
@@ -33,4 +27,23 @@ void Elevator::setCurrentFloor(int floorNumber) {
     }
 
     currentFloor = floorNumber;
+}
+
+
+bool Elevator::isBusy() const {
+    return busy;
+}
+
+
+void Elevator::setBusy(bool busy) {
+    this->busy = busy;
+}
+
+
+void Elevator::setElevatorNumber(int elevatorNumber) {
+    if (elevatorNumber < 0) {
+        throw std::invalid_argument("Elevator number must be >= 0!");
+    }
+
+    this->elevatorNumber = elevatorNumber;
 }
