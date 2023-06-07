@@ -4,11 +4,9 @@
 #include <string>
 #include <iostream>
 #include "LocalController.h"
-#include "jsonrpcpp.hpp"
+
 
 int main(int argc, char *argv[]) {
-    std::string test = jsonrpcpp::Notification("testConnnection").to_json().dump();
-
     QGuiApplication a(argc, argv);
 
     QQmlApplicationEngine engine;
@@ -49,6 +47,7 @@ int main(int argc, char *argv[]) {
     engine.rootContext()->setContextProperty("elevator2FloorButton2", &elevator2FloorButton2);
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+
 
     return a.exec();
 }

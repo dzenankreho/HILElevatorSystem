@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <iostream>
 
+
 Elevator::Elevator() : currentFloor{ 0 }, busy{ false }, elevatorNumber{ -1 } {
 }
 

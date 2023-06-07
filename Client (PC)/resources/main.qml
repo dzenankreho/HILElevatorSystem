@@ -16,60 +16,60 @@ Window {
 
 
     Floor {
-        id:sprat3
-        spratNumber: 2
+        id:floor3
+        floorNumber: 2
         buttonCppClass: elevatorCallButton2
         x: 0
         y: 0
-        lift1Number: "2"
-        lift2Number: "2"
+        elevator1Number: "2"
+        elevator2Number: "2"
         Connections {
             target: elevatorCallButton2
             function onTurnOnBacklight() {
-                sprat3.liftCallButton.turnOnBacklight()
+                floor3.elevatorCallButton.turnOnBacklight()
             }
             function onTurnOffBacklight() {
-                sprat3.liftCallButton.turnOffBacklight()
+                floor3.elevatorCallButton.turnOffBacklight()
             }
         }
     }
 
 
     Floor {
-        id:sprat2
-        spratNumber: 1
+        id:floor2
+        floorNumber: 1
         buttonCppClass: elevatorCallButton1
         x: 0
         y: mainWindow.height / 3
-        lift1Number: "1"
-        lift2Number: "1"
+        elevator1Number: "1"
+        elevator2Number: "1"
         Connections {
             target: elevatorCallButton1
             function onTurnOnBacklight() {
-                sprat2.liftCallButton.turnOnBacklight()
+                floor2.elevatorCallButton.turnOnBacklight()
             }
             function onTurnOffBacklight() {
-                sprat2.liftCallButton.turnOffBacklight()
+                floor2.elevatorCallButton.turnOffBacklight()
             }
         }
     }
 
 
     Floor {
-        id:sprat1
-        spratNumber: 0
+        id:floor1
+        floorNumber: 0
         buttonCppClass: elevatorCallButton0
         x: 0
         y: 2 * mainWindow.height / 3
-        lift1Number: "0"
-        lift2Number: "0"
+        elevator1Number: "0"
+        elevator2Number: "0"
         Connections {
             target: elevatorCallButton0
             function onTurnOnBacklight() {
-                sprat1.liftCallButton.turnOnBacklight()
+                floor1.elevatorCallButton.turnOnBacklight()
             }
             function onTurnOffBacklight() {
-                sprat1.liftCallButton.turnOffBacklight()
+                floor1.elevatorCallButton.turnOffBacklight()
             }
         }
     }
@@ -96,13 +96,13 @@ Window {
             function onOpenDoor(floor) {
                 switch (floor) {
                 case 0:
-                    sprat1.openLift1Door()
+                    floor1.openElevator1Door()
                     break;
                 case 1:
-                    sprat2.openLift1Door()
+                    floor2.openElevator1Door()
                     break;
                 case 2:
-                    sprat3.openLift1Door()
+                    floor3.openElevator1Door()
                     break;
                 default:
                     break;
@@ -111,13 +111,13 @@ Window {
             function onCloseDoor(floor) {
                 switch (floor) {
                 case 0:
-                    sprat1.closeLift1Door()
+                    floor1.closeElevator1Door()
                     break;
                 case 1:
-                    sprat2.closeLift1Door()
+                    floor2.closeElevator1Door()
                     break;
                 case 2:
-                    sprat3.closeLift1Door()
+                    floor3.closeElevator1Door()
                     break;
                 default:
                     break;
@@ -158,13 +158,13 @@ Window {
             function onOpenDoor(floor) {
                 switch (floor) {
                 case 0:
-                    sprat1.openLift2Door()
+                    floor1.openElevator2Door()
                     break;
                 case 1:
-                    sprat2.openLift2Door()
+                    floor2.openElevator2Door()
                     break;
                 case 2:
-                    sprat3.openLift2Door()
+                    floor3.openElevator2Door()
                     break;
                 default:
                     break;
@@ -173,13 +173,13 @@ Window {
             function onCloseDoor(floor) {
                 switch (floor) {
                 case 0:
-                    sprat1.closeLift2Door()
+                    floor1.closeElevator2Door()
                     break;
                 case 1:
-                    sprat2.closeLift2Door()
+                    floor2.closeElevator2Door()
                     break;
                 case 2:
-                    sprat3.closeLift2Door()
+                    floor3.closeElevator2Door()
                     break;
                 default:
                     break;
