@@ -7,7 +7,10 @@
 #include <functional>
 #include <QObject>
 
+
 class LocalController : public QObject {
+    Q_OBJECT
+
     using GuiElevatorRef = std::reference_wrapper<GuiElevator>;
     using FloorButtonRef = std::reference_wrapper<FloorButton>;
     using CallButtonRef = std::reference_wrapper<CallButton>;
@@ -25,4 +28,5 @@ public:
 public slots:
     void callButtonClicked(int floorNumber);
     void floorButtonClicked(int floorNumber);
+    void areElevatorsFree();
 };

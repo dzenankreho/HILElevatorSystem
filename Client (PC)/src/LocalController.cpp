@@ -53,6 +53,8 @@ void LocalController::registerCallButton(CallButtonRef callButton) {
      callButtons.push_back(callButton);
      QObject::connect(&callButton.get(), &CallButton::notifyController, this,
                       &LocalController::callButtonClicked, Qt::UniqueConnection);
+     QObject::connect(&callButton.get(), &CallButton::checkForFreeElevators, this,
+                      &LocalController::areElevatorsFree, Qt::UniqueConnection);
 }
 
 
@@ -122,4 +124,16 @@ void LocalController::floorButtonClicked(int floorNumber) {
             });
         });
     });
+}
+
+
+void LocalController::areElevatorsFree() {
+    for (const auto& el: elevators) {
+        if (!el.get().isBusy()) {
+            CallButton::setAreElevatorsFree(true);
+            return;
+        }
+
+    }
+    CallButton::setAreElevatorsFree(false);
 }

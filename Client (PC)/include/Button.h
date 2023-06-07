@@ -9,6 +9,7 @@ public:
     Button(int floorNumber);
     virtual Q_INVOKABLE void buttonPressed() = 0;
     int getFloorNumber() const;
+
 signals:
     void turnOnBacklight();
     void turnOffBacklight();
